@@ -13,8 +13,17 @@ extern int RATE_NUMBER;
 extern int FINAL_ARG;
 extern int SIZE_PATH;
 
-int call_attack(char* program, char** arg_list, int time_to_live);
+// Create processo to attack
+int call_attack(
+        const unsigned char* program,
+        char** arg_list,
+        const unsigned int time_to_live
+        );
 
-char* get_loic_path(char* cwd);
+// Get system path of executable loic
+char* get_loic_path();
+
+// Allog a arg list to process loic
+char** alloc_arg_list();
 
 #endif
