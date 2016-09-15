@@ -45,10 +45,11 @@ $(PROGRAM): $(SOURCE)
 	@echo "Compile source files"
 	$(CC) -c $(SRC_DIR)/main.c -o $(OBJ_DIR)/main.o $(CFLAGS) $(INCLUDE)
 	$(CC) -c $(SRC_DIR)/attack_process.c -o $(OBJ_DIR)/attack_process.o $(CFLAGS) $(INCLUDE)
+	$(CC) -c $(SRC_DIR)/io.c -o $(OBJ_DIR)/io.o $(CFLAGS) $(INCLUDE)
 	@echo "Compile loic"
 	$(CC) $(SRC_DIR)/loic.c -o $(BIN_DIR)/loic $(CFLAGS)
 	@echo "Compile objects to main"
-	$(CC)  $(OBJ_DIR)/attack_process.o $(OBJ_DIR)/main.o -o $(BIN_DIR)/$(PROGRAM)
+	$(CC)  $(OBJ_DIR)/attack_process.o $(OBJ_DIR)/main.o $(OBJ_DIR)/io.o -o $(BIN_DIR)/$(PROGRAM)
 	@echo "Creating link to run"
 	$(LINK_FORCE) $(BIN_DIR)/$(PROGRAM) $(EXECUTABLE)
 	@echo "Done!"
