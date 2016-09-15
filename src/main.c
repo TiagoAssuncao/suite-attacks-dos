@@ -46,10 +46,15 @@ int main(int argc, const char *argv[]){
     arg_list[RATE_FLAG] = "-r";
     arg_list[RATE_NUMBER] = "100";
     arg_list[FINAL_ARG] = NULL;
-    time_to_live = 5;
+    time_to_live = 2;
 
-    printf("Setting baseline\n");
-    set_baseline(cwd, arg_list, time_to_live);
+    printf("Setting baseline...\n");
+    call_attack(cwd, arg_list, time_to_live);
+
+    arg_list[RATE_NUMBER] = "300";
+    time_to_live = 5;
+    printf("Attacking...\n");
+    call_attack(cwd, arg_list, time_to_live);
 
     return 0;
 }
