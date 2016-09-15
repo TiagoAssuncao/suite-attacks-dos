@@ -12,11 +12,11 @@
 #define FINAL_ARG 4
 #define SIZE_PATH 1024
 
-int set_baseline(char* program, char** arg_list, int time_to_live){
+int call_attack(char* program, char** arg_list, int time_to_live){
     pid_t child_pid;
     child_pid = fork ();
     if (child_pid != 0){
-        sleep(5);
+        sleep(time_to_live);
         kill(child_pid, SIGTERM);
         return child_pid;
     }
