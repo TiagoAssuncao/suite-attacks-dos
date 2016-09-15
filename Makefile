@@ -28,7 +28,7 @@ LINK_FORCE = ln -fn
 # Compilator and flags
 #------------------------------------------------------------------------------
 CC = gcc
-INCLUDE = -Iinclude/
+INCLUDE = -Iinc/
 CFLAGS = -lpthread
 
 #------------------------------------------------------------------------------
@@ -43,11 +43,12 @@ all: directories $(PROGRAM)
 $(PROGRAM): $(SOURCE)
 	@echo "Initing compilation..."
 	@echo "Compile source files"
-	$(CC) -c $(SRC_DIR)/main.c -o $(OBJ_DIR)/main.o $(CFLAGS)
-	$(CC) -c $(SRC_DIR)/loic.c -o $(OBJ_DIR)/loic.o $(CFLAGS)
+	$(CC) -c $(SRC_DIR)/main.c -o $(OBJ_DIR)/main.o $(CFLAGS) $(INCLUDE)
+	$(CC) -c $(SRC_DIR)/attack_process.c -o $(OBJ_DIR)/attack_process.o $(CFLAGS) $(INCLUDE)
+	@echo "Compile loic"
+	$(CC) $(SRC_DIR)/loic.c -o $(BIN_DIR)/loic $(CFLAGS)
 	@echo "Compile objects to main"
-	$(CC)  $(OBJ_DIR)/main.o -o $(BIN_DIR)/$(PROGRAM) $(CFLAGS)
-	$(CC)  $(OBJ_DIR)/loic.o -o $(BIN_DIR)/loic $(CFLAGS)
+	$(CC)  $(OBJ_DIR)/attack_process.o $(OBJ_DIR)/main.o -o $(BIN_DIR)/$(PROGRAM)
 	@echo "Creating link to run"
 	$(LINK_FORCE) $(BIN_DIR)/$(PROGRAM) $(EXECUTABLE)
 	@echo "Done!"
