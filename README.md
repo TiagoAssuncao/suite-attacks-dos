@@ -12,4 +12,4 @@ This is the architecture of the attack.
 We have a server with IP 192.168.20.14 and an attacker with other IP.
 This software will run in attacker's pc. And will send packages to
 the server.
-[[arq.png]]
+![arq](https://raw.githubusercontent.com/wiki/TiagoAssuncao/suite-attacks-dos/arq.png)
