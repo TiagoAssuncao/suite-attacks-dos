@@ -36,8 +36,8 @@ int main(int argc, char *argv[]){
 
     set_base_valor(arg_list, loic_path, ip);
 
-    set_baseline(arg_list, loic_path, 5);
-    attack(arg_list, loic_path, 10);
+    set_baseline(arg_list, loic_path, 30);
+    attack(arg_list, loic_path, 120);
 
     return 0;
 }
