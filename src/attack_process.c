@@ -28,6 +28,7 @@ int call_attack(
     }
     else {
         /* Execute the child process (loic) */
+	printf("%s\n", arg_list[0]);
         execvp (program, arg_list);
         fprintf (stderr, "an error occurred in execvp\n");
         abort ();
@@ -38,13 +39,12 @@ int call_attack(
 char* get_loic_path(){
     char* cwd;
     cwd = malloc(SIZE_PATH * sizeof(char));
-    getcwd(cwd, SIZE_PATH * sizeof(char));
-    strcat(cwd, "/bin/loic");
+    cwd = "/usr/sbin/hping3";
 
     return cwd;
 }
 
 char** alloc_arg_list(){
-    char** arg_list = malloc(5 * sizeof(char*));
+    char** arg_list = malloc(7 * sizeof(char*));
     return arg_list;
 }
